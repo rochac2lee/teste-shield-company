@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Shield Company</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Busca de CEP's</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Teste Shield Company</h1>
+            <p>Teste para fazer parte da Shield Company usando Bootstrap 3 e jQuery com backend em Laravel 8.</p>
+        </div>
+        
+        <!-- Input de pesquisa -->
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" id="searchInput" class="form-control" placeholder="Pesquisar...">
+            </div>
+            
+            <div class="col-md-8 text-right">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCompanyModal">Cadastrar Empresa</button>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Empresas</h2>
+                <table class="table table-bordered" id="companyTable">
+                    <thead>
+                        <tr>
+                            <th>Nome Fantasia</th>
+                            <th>Razão Social</th>
+                            <th>CNPJ</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                            <th>Endereço</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de cadastro de empresa -->
+    <div class="modal fade" id="addCompanyModal" tabindex="-1" role="dialog" aria-labelledby="addCompanyModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addCompanyModalLabel">Cadastrar Empresa</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="addCompanyForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="fantasy_name">Nome Fantasia</label>
+                                    <input type="text" class="form-control" id="fantasy_name" name="fantasy_name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="legal_name">Razão Social</label>
+                                    <input type="text" class="form-control" id="legal_name" name="legal_name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="cnpj">CNPJ</label>
+                                    <input type="text" class="form-control" id="cnpj" name="cnpj">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="phone">Telefone</label>
+                                    <input type="text" class="form-control" id="phone" name="phone">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="cep">CEP</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="cep" name="cep">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button" id="searchAddressBtn">Buscar</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="street">Rua</label>
+                                    <input type="text" class="form-control" id="street" name="street">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="complement">Complemento</label>
+                                    <input type="text" class="form-control" id="complement" name="complement">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="district">Bairro</label>
+                                    <input type="text" class="form-control" id="district" name="district">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="city">Cidade</label>
+                                    <input type="text" class="form-control" id="city" name="city">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="uf">UF</label>
+                                    <input type="text" class="form-control" id="uf" name="uf">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="saveCompanyBtn">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de ver endereço -->
+    <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="addressModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addressModalLabel">Endereço Completo</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="fullAddress"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            // Função para limpar os campos do modal de cadastro de empresa
+            function clearAddCompanyModal() {
+                $('#addCompanyForm')[0].reset();
+            }
+
+            // Função para buscar o endereço pelo CEP
+            $('#searchAddressBtn').on('click', function() {
+                var cep = $('#cep').val();
+                $.ajax({
+                    url: "http://localhost:8007/api/addresses/" + cep,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data){
+                        if (data.data.length > 0) {
+                            $('#street').val(data.data[0].logradouro);
+                            $('#complement').val(data.data[0].complemento);
+                            $('#district').val(data.data[0].bairro);
+                            $('#city').val(data.data[0].localidade);
+                            $('#uf').val(data.data[0].uf);
+                        } else {
+                            alert("Endereço não encontrado")
+                        }
+                    },
+                    error: function(xhr, status, error){
+                        console.error(status, error);
+                    }
+                });
+            });
+
+            // Função para adicionar uma nova empresa
+            $('#saveCompanyBtn').on('click', function() {
+                var formData = $('#addCompanyForm').serialize();
+                $.ajax({
+                    url: "http://localhost:8007/api/companies",
+                    type: "POST",
+                    data: formData,
+                    success: function(data){
+                        // Limpar campos e fechar modal
+                        clearAddCompanyModal();
+                        $('#addCompanyModal').modal('hide');
+                        // Atualizar tabela de empresas
+                        updateCompanyTable();
+                    },
+                    error: function(xhr, status, error){
+                        console.error(status, error);
+                    }
+                });
+            });
+
+            // Função para atualizar a tabela de empresas
+            function updateCompanyTable() {
+                $.ajax({
+                    url: "http://localhost:8007/api/companies",
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data){
+                        $('#companyTable tbody').empty();
+                        $.each(data.data, function(index, company){
+                            var fullAddress = 'Rua ' + company.street + ', ' + company.complement + ', ' + company.district + ', ' + company.city + ' - ' + company.uf + ', CEP: ' + company.cep;
+                            $('#companyTable tbody').append('<tr><td>' + company.fantasy_name + '</td><td>' + company.legal_name + '</td><td>' + company.cnpj + '</td><td>' + company.email + '</td><td>' + company.phone + '</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addressModal" data-address="' + fullAddress + '">Ver Endereço</button></td></tr>');
+                        });
+                    },
+                    error: function(xhr, status, error){
+                        console.error(status, error);
+                    }
+                });
+            }
+
+            // Trazer os dados de endereço da empresa no modal
+            $('#addressModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var address = button.data('address');
+                var modal = $(this);
+                modal.find('.modal-body #fullAddress').text(address);
+            });
+
+            // Filtrar tabela
+            $('#searchInput').on('keyup', function() {
+                var value = $(this).val().toLowerCase();
+                $('#companyTable tbody tr').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            // Formatação do CNPJ
+            $('#cnpj').on('input', function() {
+                var cnpj = $(this).val().replace(/\D/g, '');
+                if (cnpj.length > 14) {
+                    cnpj = cnpj.substr(0, 14);
+                }
+                cnpj = cnpj.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, '$1.$2.$3/$4-$5');
+                $(this).val(cnpj);
+            });
+
+            // Formatação do telefone
+            $('#phone').on('input', function() {
+                var phone = $(this).val().replace(/\D/g, '');
+                if (phone.length > 11) {
+                    phone = phone.substr(0, 11);
+                }
+                if (phone.length > 10) {
+                    phone = phone.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+                } else {
+                    phone = phone.replace(/^(\d{2})(\d{4})(\d{4})$/, '($1) $2-$3');
+                }
+                $(this).val(phone);
+            });
+
+            // Carregar a tabela de empresas ao carregar a página
+            updateCompanyTable();
+        });
+    </script>
+</body>
+</html>
